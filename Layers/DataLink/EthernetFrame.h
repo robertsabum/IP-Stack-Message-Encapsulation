@@ -2,7 +2,7 @@
 #define FRAME_H
 
 #include <iostream>
-#include "../Network/IPPacket.h"
+#include "../Network/IPv4Packet.h"
 using namespace std;
 
 class EthernetFrame {

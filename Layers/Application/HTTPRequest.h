@@ -45,4 +45,16 @@ class HTTPRequest{
         string getBody() {
             return body;
         }
+
+        void print() {
+            cout << "HTTP Request" << endl;
+            cout << "Method: " << method << endl;
+            cout << "URL: " << url << endl;
+            cout << "Version: " << version << endl;
+            cout << "Headers: " << endl;
+            for (auto const& x : headers) {
+                cout << x.first << ": " << x.second << endl;
+            }
+            cout << "Body: " << body << endl;
+        }
 }

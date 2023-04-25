@@ -2,51 +2,50 @@
 #define PHYSICALLAYER_H
 
 #include <iostream>
+#include "../DataLink/EthernetFrame.h"
+#include "../DataLink/DataLinkLayer.h"
 using namespace std;
 
 class PhysicalLayer {
     private:
-        string id:
-        string protocol;
-        unsigned char* sourceAddress;
-        unsigned char* destinationAddress;
+        bool connected;
+        PhysicalLayer* destinationPhysicalLayer;
+        DataLinkLayer* sourceDataLinkLayer;
         
 
     public:
-        PhysicalLayer(string id, unsigned char* sourceAddress, unsigned char* destinationAddress) {
-            this->id = id;
-            this->protocol = "802.3";   // 10BASE-T Ethernet
-            this->sourceAddress = sourceAddress;
-            this->destinationAddress = destinationAddress;
+        PhysicalLayer(DataLinkLayer* sourceDataLinkLayer) {
+            this->connected = false;
+            this->sourceDataLinkLayer = sourceDataLinkLayer;
         }
 
         ~PhysicalLayer() {
 
         }
 
-        string getId() {
-            return id;
+        void connect(PhysicalLayer* destinationPhysicalLayer) {
+            this->destinationPhysicalLayer = destinationPhysicalLayer;
+            this->connected = true;
         }
 
-        string getProtocol() {
-            return protocol;
+        void disconnect() {
+            this->destinationPhysicalLayer = NULL;
+            this->connected = false;
         }
 
-        unsigned char* getSourceAddress() {
-            return sourceAddress;
+        bool isConnected() {
+            return connected;
         }
 
-        unsigned char* getDestinationAddress() {
-            return destinationAddress;
+        void send(EthernetFrame* frame) {
+            if (connected) {
+                destinationPhysicalLayer->receive(frame);
+            }
         }
 
-
-        void sendFrame(EthernetFrame frame) {
-            frame.setSourceAddress(sourceAddress);
-            frame.setDestinationAddress(destinationAddress);
-        }
-
-        void receiveFrame(EthernetFrame frame) {
-    
+        void receive(EthernetFrame* frame) {
+            sourceDataLinkLayer->receive(frame);
         }
 };
+
+#endif
