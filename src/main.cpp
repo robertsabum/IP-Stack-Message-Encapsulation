@@ -8,12 +8,15 @@ using namespace std;
 
 int main()
 {
-  // string file = "http_get_request.txt";
-  HTTPRequest *request = new HTTPRequest();
-  // request->print();
+  string filename = "http_post_request.txt";
+  HTTPRequest *request = new HTTPRequest(filename);
+
   TCPStack *stack1 = new TCPStack();
   TCPStack *stack2 = new TCPStack();
 
+  cout << "\n\n ****** Sending HTTP Request ******" << endl;
   BitStream *bits1 = stack1->send(new HTTPMessage(request));
+  
+  cout << "\n\n ****** Recieving Bitstream ******" << endl;
   stack2->receive(bits1);
 }
