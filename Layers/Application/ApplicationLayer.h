@@ -1,56 +1,37 @@
 #ifndef APPLICATIONLAYER_H
 #define APPLICATIONLAYER_H
 
-#include <iostream>
 #include "../Transport/TransportLayer.h"
+#include "HTTPMessage.h"
 #include "HTTPRequest.h"
 #include "HTTPResponse.h"
-#include "HTTPMessage.h"
+#include <iostream>
 using namespace std;
 
-class ApplicationLayer{
-    private:
-        TransportLayer* TransportLayer;
+class ApplicationLayer
+{
 
-    public:
-        ApplicationLayer() {
-            this->TransportLayer = NULL;
-            this->connected = false;
-        }
+public:
+  ApplicationLayer() {}
 
-        ~ApplicationLayer() {
-            this->disconnect();
-        }
+  HTTPMessage *send(HTTPMessage *message)
+  {
+    if (message->isRequest())
+    {
+      cout << "\nSent a Request to the Transport Layer" << endl;
+    }
+    else
+    {
+      cout << "\nSent a Response to the Transport Layer" << endl;
+    }
+    return message;
+  }
 
-        void connect(TransportLayer* TransportLayer) {
-            this->TransportLayer = TransportLayer;
-            this->TransportLayer->connect(this);
-            this->connected = true;
-        }
-
-        void disconnect() {
-            this->TransportLayer->disconnect(this);
-            this->TransportLayer = NULL;
-            this->connected = false;
-        }
-
-        void send(HTTPMessage* message) {
-            if (TransportLayer != NULL) {
-                cout << "Sent an HTTPMessage to the Transport Layer" << endl;
-                    TransportLayer->recieve(message);
-            }
-            else {
-                cout << "Application Layer is not connected to a Transport Layer" << endl;
-            }
-        }
-
-        void recieve(HTTPMessage* message) {
-            cout << "Recieved an HTTPMessage from the Transport Layer" << endl;
-            message->print();
-            if (message->isRequest) {
-                HTTPMessage* response = new HTTPMessage(HTTPResponse());
-                send(response);
-            }
+  void recieve(HTTPMessage *message)
+  {
+    cout << "\nRecieved an HTTPMessage from the Transport Layer" << endl;
+    message->print();
+  }
 };
 
 #endif

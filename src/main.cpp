@@ -1,19 +1,19 @@
-#include <string>
-#include <iostream>
-#include "../Layers/Application/HTTPRequest.h"
 #include "../Layers/Application/HTTPMessage.h"
-// #include "../Layers/Application/ApplicationLayer.h"
-// #include "../Layers/Transport/TransportLayer.h"
-// #include "../Layers/Network/NetworkLayer.h"
-// #include "../Layers/DataLink/DataLinkLayer.h"
-// #include "../Layers/Physical/PhysicalLayer.h"
+#include "../Layers/Application/HTTPRequest.h"
+#include "TCPStack.h"
+#include <iostream>
+#include <string>
 
 using namespace std;
 
+int main()
+{
+  // string file = "http_get_request.txt";
+  HTTPRequest *request = new HTTPRequest();
+  // request->print();
+  TCPStack *stack1 = new TCPStack();
+  TCPStack *stack2 = new TCPStack();
 
-int main(){
-    string file = "htt_get_request.txt";
-    HTTPRequest* request = new HTTPRequest(file);
-    request->print();
-    
+  BitStream *bits1 = stack1->send(new HTTPMessage(request));
+  stack2->receive(bits1);
 }
