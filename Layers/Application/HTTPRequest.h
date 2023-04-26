@@ -22,6 +22,14 @@ class HTTPRequest{
             this->body = body;
         }
 
+        HTTPRequest() {
+            this->method = "GET";
+            this->url = "/";
+            this->version = "HTTP/1.1";
+            this->headers = map<string, string>();
+            this->body = "";
+        }
+
         ~HTTPRequest() {
 
         }
@@ -44,6 +52,26 @@ class HTTPRequest{
 
         string getBody() {
             return body;
+        }
+
+        void setMethod(string method) {
+            this->method = method;
+        }
+
+        void setUrl(string url) {
+            this->url = url;
+        }
+
+        void setVersion(string version) {
+            this->version = version;
+        }
+
+        void setHeaders(map<string, string> headers) {
+            this->headers = headers;
+        }
+
+        void setBody(string body) {
+            this->body = body;
         }
 
         void print() {

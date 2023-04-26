@@ -2,8 +2,7 @@
 #define TCPSEGMENT_H
 
 #include <iostream>
-#include <variant>
-#include "../Application/HTTPRequest.h"
+#include "../Application/HTTPMessage.h"
 using namespace std;
 
 class TCPSegment{
@@ -18,11 +17,11 @@ class TCPSegment{
         uint16_t checksum;
         uint16_t urgentPointer;
         unsigned char* options;
-        variant<HTTPRequest*, HTTPResponse*> payload;
+        HTTPMessage* message;
 
     public:
-        TCPSegment(variant<HTTPRequest*, HTTPResponse*> payload) {
-            this->payload = payload;
+        TCPSegment(HTTPMessage* message) {
+            this->message = message;
             this->sourcePort = rand() % 65535;
             this->destinationPort = rand() % 65535;
             this->sequenceNumber = rand() % 4294967295;
@@ -79,8 +78,8 @@ class TCPSegment{
             return options;
         }
 
-        HTTPRequest* getHTTPRequest() {
-            return request;
+        HTTPMessage* getHTTPMessage() {
+            return message;
         }
 
         void setSourcePort(uint16_t sourcePort) {

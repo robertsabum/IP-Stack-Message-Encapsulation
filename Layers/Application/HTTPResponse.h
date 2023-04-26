@@ -26,10 +26,10 @@ class HTTPResponse{
 
         HTTPResponse() {
             this->version = "HTTP/1.1";
-            this->statusCode = "200 OK";
-            this->reasonPhrase = "";
+            this->statusCode = "200";
+            this->reasonPhrase = "OK";
             this->headers = map<string, string>();
-            this->body = "";
+            this->body = "<html><body><h1>It works!</h1></body></html>";
         }
 
         ~HTTPResponse() {
@@ -54,6 +54,26 @@ class HTTPResponse{
 
         string getBody() {
             return body;
+        }
+
+        void setVersion(string version) {
+            this->version = version;
+        }
+
+        void setStatusCode(string statusCode) {
+            this->statusCode = statusCode;
+        }
+
+        void setReasonPhrase(string reasonPhrase) {
+            this->reasonPhrase = reasonPhrase;
+        }
+
+        void setHeaders(map<string, string> headers) {
+            this->headers = headers;
+        }
+
+        void setBody(string body) {
+            this->body = body;
         }
 
         void print() {

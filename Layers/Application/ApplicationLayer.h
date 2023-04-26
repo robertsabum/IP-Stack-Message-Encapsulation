@@ -5,7 +5,7 @@
 #include "../Transport/TransportLayer.h"
 #include "HTTPRequest.h"
 #include "HTTPResponse.h"
-#include <queue>
+#include "HTTPMessage.h"
 using namespace std;
 
 class ApplicationLayer{
@@ -39,37 +39,23 @@ class ApplicationLayer{
             return connected;
         }
 
-        void send(HTTPRequest* request) {
+        void send(HTTPMessage* message) {
             if (connected) {
-                cout << "Sent an HTTPRequest to the Transport Layer" << endl;
-                TransportLayer->recieve(request);
+                cout << "Sent an HTTPMessage to the Transport Layer" << endl;
+                    TransportLayer->recieve(message);
             }
             else {
                 cout << "Application Layer is not connected to a Transport Layer" << endl;
             }
         }
 
-        void send(HTTPResponse* response) {
-            if (connected) {
-                cout << "Sent an HTTPResponse to the Transport Layer" << endl;
-                TransportLayer->recieve(response);
+        void recieve(HTTPMessage* message) {
+            cout << "Recieved an HTTPMessage from the Transport Layer" << endl;
+            message->print();
+            if (message->isRequest) {
+                HTTPMessage* response = new HTTPMessage(HTTPResponse());
+                send(response);
             }
-            else {
-                cout << "Application Layer is not connected to a Transport Layer" << endl;
-            }
-        }
-
-        void recieve(HTTPResponse* response) {
-            cout << "Recieved a response in the buffer" << endl;
-            response->print();
-        }
-
-        void recieve(HTTPRequest* request) {
-            cout << "Recieved a request in the buffer" << endl;
-            // send a generic response
-            HTTPResponse* response = new HTTPResponse(request->getVersion(), 200, "OK", "This is a generic response");
-            send(response);
-        }
 };
 
 #endif
