@@ -37,23 +37,23 @@ class HTTPResponse{
         }
 
         string getVersion() {
-            return version;
+            return this->version;
         }
 
         string getStatusCode() {
-            return statusCode;
+            return this->statusCode;
         }
 
         string getReasonPhrase() {
-            return reasonPhrase;
+            return this->reasonPhrase;
         }
 
         map<string, string> getHeaders() {
-            return headers;
+            return this->headers;
         }
 
         string getBody() {
-            return body;
+            return this->body;
         }
 
         void setVersion(string version) {
@@ -78,14 +78,14 @@ class HTTPResponse{
 
         void print() {
             cout << "HTTP Response" << endl;
-            cout << "Version: " << version << endl;
-            cout << "Status Code: " << statusCode << endl;
-            cout << "Reason Phrase: " << reasonPhrase << endl;
+            cout << "Version: " << this->version << endl;
+            cout << "Status Code: " << this->statusCode << endl;
+            cout << "Reason Phrase: " << this->reasonPhrase << endl;
             cout << "Headers: " << endl;
-            for (auto const& x : headers) {
+            for (auto const& x : this->headers) {
                 cout << x.first << ": " << x.second << endl;
             }
-            cout << "Body: " << body << endl;
+            cout << "Body: " << this->body << endl;
         }
 };
 

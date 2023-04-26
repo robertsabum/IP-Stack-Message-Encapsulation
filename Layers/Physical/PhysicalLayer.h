@@ -26,7 +26,7 @@ class PhysicalLayer {
                 this->physicalLayer->disconnect(this);
             }
             if (this->dataLinkLayer != NULL){
-                dataLinkLayer->disconnect(this);
+                this->dataLinkLayer->disconnect(this);
             }
         }
 
@@ -38,7 +38,7 @@ class PhysicalLayer {
             this->dataLinkLayer = dataLinkLayer;
         }
 
-        void disconnect(physicalLayer* physicalLayer) {
+        void disconnect(PhysicalLayer* physicalLayer) {
             this->physicalLayer = NULL;
         }
 
@@ -47,19 +47,19 @@ class PhysicalLayer {
         }
 
         void send(EthernetFrame* frame) {
-            if (dataLinkLayer != NULL) {
+            if (this->dataLinkLayer != NULL) {
                 cout << "Sent an Ethernet Frame to the Data Link Layer" << endl;
-                dataLinkLayer->receive(frame);
+                this->dataLinkLayer->receive(frame);
             }
             else {
                 cout << "Physical Layer is not connected to a Data Link Layer" << endl;
             }
         }
 
-        void send(Bitstream* bitstream) {
-            if (physicalLayer != NULL) {
+        void send(BitStream* bitstream) {
+            if (this->physicalLayer != NULL) {
                 cout << "Sent a Bitstream to the Physical Layer" << endl;
-                physicalLayer->receive(bitstream);
+                this->physicalLayer->receive(bitstream);
             }
             else {
                 cout << "Physical Layer is not connected to a Physical Layer" << endl;
@@ -72,9 +72,9 @@ class PhysicalLayer {
             serve();
         }
 
-        void receive(Bitstream* bitstream) {
+        void receive(BitStream* bitstream) {
             cout << "Received a Bitstream from the Physical Layer" << endl;
-            EthernetFrame* frame = bitsream->getEthernetFrame();
+            EthernetFrame* frame = bitstream->getEthernetFrame();
             delete bitstream;
             send(frame);
         }
@@ -83,7 +83,7 @@ class PhysicalLayer {
             if (Ethernetbuffer.size() > 0) {
                 EthernetFrame* frame = Ethernetbuffer.front();
                 Ethernetbuffer.pop();
-                Bitstream* bitstream = new Bitstream(frame);
+                BitStream* bitstream = new BitStream(frame);
                 send(bitstream);
                 cout << "Served an item from the buffer" << endl;
             }

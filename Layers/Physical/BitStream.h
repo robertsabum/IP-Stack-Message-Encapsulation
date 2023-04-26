@@ -16,6 +16,7 @@ class BitStream{
     public:
         BitStream(EthernetFrame* frame) {
             this->frame = frame;
+            this->bits = vector<bool>();
         }
 
         ~BitStream() {

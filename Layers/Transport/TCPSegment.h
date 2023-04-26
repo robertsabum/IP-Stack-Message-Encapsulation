@@ -122,8 +122,8 @@ class TCPSegment{
             this->options = options;
         }
 
-        void setHTTPRequest(HTTPRequest* request) {
-            this->request = request;
+        void setHTTPMessage(HTTPMessage* message) {
+            this->message = message;
         }
 };
 

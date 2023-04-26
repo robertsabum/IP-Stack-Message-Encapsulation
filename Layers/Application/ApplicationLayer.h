@@ -10,7 +10,6 @@ using namespace std;
 
 class ApplicationLayer{
     private:
-        bool connected;
         TransportLayer* TransportLayer;
 
     public:
@@ -35,12 +34,8 @@ class ApplicationLayer{
             this->connected = false;
         }
 
-        bool isConnected() {
-            return connected;
-        }
-
         void send(HTTPMessage* message) {
-            if (connected) {
+            if (TransportLayer != NULL) {
                 cout << "Sent an HTTPMessage to the Transport Layer" << endl;
                     TransportLayer->recieve(message);
             }

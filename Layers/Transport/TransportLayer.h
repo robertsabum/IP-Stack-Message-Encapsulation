@@ -4,7 +4,7 @@
 #include <iostream>
 #include "../Application/ApplicationLayer.h"
 #include "../Network/NetworkLayer.h"
-#include "HTTPMessage.h"
+#include "../Application/HTTPMessage.h"
 #include "TCPSegment.h"
 #include <queue>
 using namespace std;
@@ -36,7 +36,7 @@ class TransportLayer {
 
         void connect(NetworkLayer* networkLayer) {
             this->networkLayer = networkLayer;
-            networkLayer->connect(this);
+            this->networkLayer->connect(this);
         }
 
         void disconnect(ApplicationLayer* applicationLayer) {
@@ -45,17 +45,13 @@ class TransportLayer {
 
         void disconnect(NetworkLayer* networkLayer) {
             this->networkLayer = NULL;
-            networkLayer->disconnect(this);
-        }
-
-        bool isConnected() {
-            return (applicationLayer != NULL && networkLayer != NULL)
+            this->networkLayer->disconnect(this);
         }
 
         void send(TCPSegment* segment) {
-            if (isConnected()) {
+            if (this->networkLayer != NULL) {
                 cout << "Sent a TCP Segment to the Network Layer" << endl;
-                networkLayer->recieve(segment);
+                this->networkLayer->recieve(segment);
             }
             else {
                 cout << "Transport Layer is not connected" << endl;
@@ -63,9 +59,9 @@ class TransportLayer {
         }
 
         void send(HTTPMessage* message) {
-            if (isConnected()) {
+            if (this->applicationLayer != NULL) {
                 cout << "Sent an HTTPMessage to the Application Layer" << endl;
-                applicationLayer->recieve(message);
+                this->applicationLayer->recieve(message);
             }
             else {
                 cout << "Transport Layer is not connected" << endl;
@@ -81,14 +77,15 @@ class TransportLayer {
 
         void recieve(HTTPMessage* message) {
             cout << "Recieved an HTTPMessage from the Application Layer" << endl;
-            HTTPbuffer.push(message);
+            this->HTTPbuffer.push(message);
             serve();
         }
 
         void serve() {
             if (HTTPbuffer.size() > 0) {
-                TCPSegment* segment = new TCPSegment(HTTPbuffer.front());
-                HTTPbuffer.pop();
+                HTTPMessage* message = this->HTTPbuffer.front();
+                TCPSegment* segment = new TCPSegment(message);
+                this->HTTPbuffer.pop();
                 cout << "Served an item from the buffer" << endl;
                 send(segment);
             }

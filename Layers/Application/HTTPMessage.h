@@ -8,36 +8,32 @@ using namespace std;
 
 class HTTPMessage {
     private:
-        bool isRequest;
-        union {
-            HTTPRequest request;
-            HTTPResponse response;
-        } message;
+        bool _isRequest;
+        HTTPRequest* request;
+        HTTPResponse* response;
 
     public:
-        HTTPMessage(HTTPRequest request) {
-            isRequest = true;
-            message.request = request;
+        HTTPMessage(HTTPRequest* _request) {
+            this->_isRequest = true;
+            this->request = _request;
         }
 
-        HTTPMessage(HTTPResponse response) {
-            isRequest = false;
-            message.response = response;
+        HTTPMessage(HTTPResponse* _response) {
+            this->_isRequest = false;
+            this->response = _response;
         }
 
         void print() {
-            if (isRequest) {
-                message.request.print();
+            if (this->_isRequest) {
+                this->request->print();
             } else {
-                message.response.print();
+                this->response->print();
             }
         }
 
         bool isRequest() {
-            return isRequest;
-        }
-
-        bool isResponse() {
-            return !isRequest;
+            return this->_isRequest;
         }
 };
+
+#endif

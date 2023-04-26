@@ -3,6 +3,12 @@
 
 #include <iostream>
 #include <map>
+#include <string>
+#include <fstream>
+#include <vector>
+#include <sstream>
+#include <regex>
+#include <iterator>
 using namespace std;
 
 class HTTPRequest{
@@ -12,6 +18,18 @@ class HTTPRequest{
         string version;
         map<string, string> headers;
         string body;
+
+        vector<string> split(string str, char delimiter) {
+            vector<string> internal;
+            stringstream ss(str);
+            string tok;
+
+            while(getline(ss, tok, delimiter)) {
+                internal.push_back(tok);
+            }
+
+            return internal;
+        }
 
     public:
         HTTPRequest(string method, string url, string version, map<string, string> headers, string body) {
@@ -30,28 +48,52 @@ class HTTPRequest{
             this->body = "";
         }
 
+        // Create a HTTPRequest from a file
+        HTTPRequest(string filename) {
+            // Open the file
+            ifstream file(filename);
+            string line;
+            // Get the method, url, and version
+            getline(file, line);
+            vector<string> requestLine = split(line, ' ');
+            this->method = requestLine[0];
+            this->url = requestLine[1];
+            this->version = requestLine[2];
+            // Get the headers
+            while (getline(file, line)) {
+                if (line == "\r") {
+                    break;
+                }
+                vector<string> header = split(line, ':');
+                this->headers[header[0]] = header[1];
+            }
+            // Get the body
+            getline(file, line);
+            this->body = line;
+        }
+
         ~HTTPRequest() {
 
         }
 
         string getMethod() {
-            return method;
+            return this->method;
         }
 
         string getUrl() {
-            return url;
+            return this->url;
         }
 
         string getVersion() {
-            return version;
+            return this->version;
         }
 
         map<string, string> getHeaders() {
-            return headers;
+            return this->headers;
         }
 
         string getBody() {
-            return body;
+            return this->body;
         }
 
         void setMethod(string method) {
@@ -76,13 +118,15 @@ class HTTPRequest{
 
         void print() {
             cout << "HTTP Request" << endl;
-            cout << "Method: " << method << endl;
-            cout << "URL: " << url << endl;
-            cout << "Version: " << version << endl;
+            cout << "Method: " << this->method << endl;
+            cout << "URL: " << this->url << endl;
+            cout << "Version: " << this->version << endl;
             cout << "Headers: " << endl;
-            for (auto const& x : headers) {
+            for (auto const& x : this->headers) {
                 cout << x.first << ": " << x.second << endl;
             }
-            cout << "Body: " << body << endl;
+            cout << "Body: " << this->body << endl;
         }
-}
+};
+
+#endif

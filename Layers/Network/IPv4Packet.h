@@ -165,4 +165,6 @@ class IPv4Packet{
         void setTCPSegment(TCPSegment* segment) {
             this->segment = segment;
         }
-}
+};
+
+#endif

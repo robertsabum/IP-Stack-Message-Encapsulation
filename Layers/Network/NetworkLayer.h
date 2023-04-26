@@ -16,46 +16,46 @@ using namespace std;
 class NetworkLayer{
     private:
         queue<TCPSegment*> TCPbuffer;
-        TransportLayer* TransportLayer;
-        DataLinkLayer* DataLinkLayer;
+        TransportLayer* transportLayer;
+        DataLinkLayer* dataLinkLayer;
 
     public:
         NetworkLayer() {
-            this->TransportLayer = NULL;
-            this->DataLinkLayer = NULL;
+            this->transportLayer = NULL;
+            this->dataLinkLayer = NULL;
         }
 
         ~NetworkLayer() {
-            if (this->TransportLayer != NULL){
-                this->TransportLayer->disconnect(this);
+            if (this->transportLayer != NULL){
+                this->transportLayer->disconnect(this);
             }
-            if (this->DataLinkLayer != NULL){
-                disconnect(this->DataLinkLayer);
+            if (this->dataLinkLayer != NULL){
+                disconnect(this->dataLinkLayer);
             }
         }
 
-        void connect(TransportLayer* TransportLayer) {
-            this->TransportLayer = TransportLayer;
+        void connect(TransportLayer* transportLayer) {
+            this->transportLayer = transportLayer;
         }
 
-        void connect(DataLinkLayer* DataLinkLayer) {
-            this->DataLinkLayer = DataLinkLayer;
-            this->DataLinkLayer->connect(this);
+        void connect(DataLinkLayer* dataLinkLayer) {
+            this->dataLinkLayer = dataLinkLayer;
+            this->dataLinkLayer->connect(this);
         }
 
-        void disconnect(TransportLayer* TransportLayer) {
-            this->TransportLayer = NULL;
+        void disconnect(TransportLayer* transportLayer) {
+            this->transportLayer = NULL;
         }
 
-        void disconnect(DataLinkLayer* DataLinkLayer) {
-            this->DataLinkLayer = NULL;
-            this->DataLinkLayer->disconnect(this);
+        void disconnect(DataLinkLayer* dataLinkLayer) {
+            this->dataLinkLayer = NULL;
+            this->dataLinkLayer->disconnect(this);
         }
 
         void send(IPv4Packet* packet) {
-            if (DataLinkLayer != NULL) {
+            if (this->dataLinkLayer != NULL) {
                 cout << "Sent an IPv4 Packet to the Data Link Layer" << endl;
-                DataLinkLayer->recieve(packet);
+                this->dataLinkLayer->recieve(packet);
             }
             else {
                 cout << "Network Layer is not connected to a Data Link Layer" << endl;
@@ -63,9 +63,9 @@ class NetworkLayer{
         }
 
         void send(TCPSegment* segment) {
-            if (TransportLayer != NULL) {
+            if (this->transportLayer != NULL) {
                 cout << "Sent a TCP Segment to the Transport Layer" << endl;
-                TransportLayer->recieve(segment);
+                this->transportLayer->recieve(segment);
             }
             else {
                 cout << "Network Layer is not connected to a Transport Layer" << endl;
@@ -81,14 +81,14 @@ class NetworkLayer{
 
         void recieve(TCPSegment* segment) {
             cout << "Recieved a TCP Segment from the Transport Layer" << endl;
-            TCPbuffer.push(segment);
+            this->TCPbuffer.push(segment);
             serve();
         }
 
         void serve() {
             if (TCPbuffer.size() > 0) {
-                TCPSegment* segment = TCPbuffer.front();
-                TCPbuffer.pop();
+                TCPSegment* segment = this->TCPbuffer.front();
+                this->TCPbuffer.pop();
                 IPv4Packet* packet = new IPv4Packet(segment);
                 cout << "Served item from buffer" << endl;
                 send(packet);
