@@ -583,7 +583,7 @@ Output:
     Body: <html><body><h1>It works!</h1></body></html>
 ```
 
-#### HTTPMessage
+## HTTPMessage
 
 This class represents an HTTP Message. It has the following properties:
 
