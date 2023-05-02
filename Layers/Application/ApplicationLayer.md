@@ -1,5 +1,113 @@
 code
 ```cpp
+#ifndef HTTPRESPONSE_H
+#define HTTPRESPONSE_H
+
+#include <iostream>
+#include <map>
+#include <string>
+
+using namespace std;
+
+class HTTPResponse
+{
+private:
+    string version;
+    string statusCode;
+    string reasonPhrase;
+    map<string, string> headers;
+    string body;
+
+public:
+    HTTPResponse(string version, string statusCode, string reasonPhrase, map<string, string> headers, string body)
+    {
+        this->version = version;
+        this->statusCode = statusCode;
+        this->reasonPhrase = reasonPhrase;
+        this->headers = headers;
+        this->body = body;
+    }
+
+    HTTPResponse()
+    {
+        this->version = "HTTP/1.1";
+        this->statusCode = "200";
+        this->reasonPhrase = "OK";
+        this->headers = map<string, string>();
+        this->body = "<html><body><h1>It works!</h1></body></html>";
+    }
+
+    ~HTTPResponse()
+    {
+    }
+
+    string getVersion()
+    {
+        return this->version;
+    }
+
+    string getStatusCode()
+    {
+        return this->statusCode;
+    }
+
+    string getReasonPhrase()
+    {
+        return this->reasonPhrase;
+    }
+
+    map<string, string> getHeaders()
+    {
+        return this->headers;
+    }
+
+    string getBody()
+    {
+        return this->body;
+    }
+
+    void setVersion(string version)
+    {
+        this->version = version;
+    }
+
+    void setStatusCode(string statusCode)
+    {
+        this->statusCode = statusCode;
+    }
+
+    void setReasonPhrase(string reasonPhrase)
+    {
+        this->reasonPhrase = reasonPhrase;
+    }
+
+    void setHeaders(map<string, string> headers)
+    {
+        this->headers = headers;
+    }
+
+    void setBody(string body)
+    {
+        this->body = body;
+    }
+
+    void print()
+    {
+        cout << "HTTP Response" << endl;
+        cout << "Version: " << this->version << endl;
+        cout << "Status Code: " << this->statusCode << endl;
+        cout << "Reason Phrase: " << this->reasonPhrase << endl;
+        cout << "Headers: " << endl;
+        for (auto const &x : this->headers)
+        {
+            cout << x.first << ": " << x.second << endl;
+        }
+        cout << "Body: " << this->body << endl;
+        cout << endl;
+    }
+};
+
+#endif
 
 ```
 # Application Layer
@@ -299,4 +407,177 @@ Output:
 ```
     Body: username=hello&password=world
     Body: username=world&password=hello
+```
+
+
+### HTTPResponse()
+
+This is the default constructor for the HTTPResponse class. 
+ 
+Example usage:
+```cpp
+    HTTPResponse* response = new HTTPResponse();
+```
+
+### void print()
+
+This method prints the HTTP Response to the console. 
+ 
+ Sample output:
+ ```
+    HTTP Response
+    Version: HTTP/1.1
+    Status Code: 200
+    Reason Phrase: OK
+    Headers:
+    Content-Type: text/html
+    Content-Length: 48
+    Body: <html><body><h1>It works!</h1></body></html>
+ ```
+
+### bool isResponse()
+
+This method returns true if the HTTP Message is a response and false if it is a request. 
+ 
+Example usage:
+```cpp
+    HTTPResponse* response = new HTTPResponse();
+    if (response->isResponse()) {
+        cout << "This is a response" << endl;
+    } else {
+        cout << "This is a request" << endl;
+    }
+ ```
+
+### string getVersion()
+
+This method returns the version of the HTTP Response. 
+ 
+Example usage:
+```cpp
+    HTTPResponse* response = new HTTPResponse();
+    cout << "Version: " << response->getVersion() << endl;
+```
+
+Output:
+```
+    Version: HTTP/1.1
+```
+
+### string getStatusCode()
+
+This method returns the status code of the HTTP Response. 
+ 
+Example usage:
+```cpp
+    HTTPResponse* response = new HTTPResponse();
+    cout << "Status Code: " << response->getStatusCode() << endl;
+```
+
+Output:
+```
+    Status Code: 200
+```
+
+### string getReasonPhrase()
+
+This method returns the reason phrase of the HTTP Response. 
+ 
+Example usage:
+```cpp
+    HTTPResponse* response = new HTTPResponse();
+    cout << "Reason Phrase: " << response->getReasonPhrase() << endl;
+```
+
+Output:
+```
+    Reason Phrase: OK
+```
+
+### map<string, string> getHeaders()
+
+This method returns the headers of the HTTP Response. 
+ 
+Example usage:
+```cpp
+    HTTPResponse* response = new HTTPResponse();
+    map<string, string> headers = response->getHeaders();
+    for (auto const &x : headers)
+    {
+        cout << x.first << ": " << x.second << endl;
+    }
+```
+
+Output:
+```
+    Content-Type: text/html
+    Content-Length: 48
+```
+
+### string getBody()
+
+This method returns the body of the HTTP Response. 
+ 
+Example usage:
+```cpp
+    HTTPResponse* response = new HTTPResponse();
+    cout << "Body: " << response->getBody() << endl;
+```
+
+Output:
+```
+    Body: <html><body><h1>It works!</h1></body></html>
+```
+
+### void setVersion(string version)
+
+This method sets the version of the HTTP Response. 
+ 
+Example usage:
+```cpp
+    HTTPResponse* response = new HTTPResponse();
+    response->setVersion("HTTP/1.0");
+```
+
+### void setStatusCode(string statusCode)
+
+This method sets the status code of the HTTP Response. 
+ 
+Example usage:
+```cpp
+    HTTPResponse* response = new HTTPResponse();
+    response->setStatusCode("404");
+```
+
+### void setReasonPhrase(string reasonPhrase)
+
+This method sets the reason phrase of the HTTP Response. 
+ 
+Example usage:
+```cpp
+    HTTPResponse* response = new HTTPResponse();
+    response->setReasonPhrase("Not Found");
+```
+
+### void setHeaders(map<string, string> headers)
+
+This method sets the headers of the HTTP Response. 
+ 
+Example usage:
+```cpp
+    HTTPResponse* response = new HTTPResponse();
+    map<string, string> headers;
+    headers["Content-Type"] = "text/html";
+    headers["Content-Length"] = "48";
+    response->setHeaders(headers);
+```
+
+### void setBody(string body)
+
+This method sets the body of the HTTP Response. 
+ 
+Example usage:
+```cpp
+    HTTPResponse* response = new HTTPResponse();
+    response->setBody("<html><body><h1>It works!</h1></body></html>");
 ```
