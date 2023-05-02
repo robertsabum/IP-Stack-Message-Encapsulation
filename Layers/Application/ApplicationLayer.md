@@ -19,6 +19,7 @@ This folder contains the code for the Application Layer of the TCP Stack. It con
  - `headers` : map<string, string>
  - `body` : string
 
+
  It has the following methods:
  - [HTTPRequest(string method, string url, string version, map<string, string> headers, string body)](#HTTPRequeststring-method-string-url-string-version-mapstring-string-headers-string-body)
  - [HTTPRequest()](#HTTPRequest)
@@ -39,7 +40,9 @@ This folder contains the code for the Application Layer of the TCP Stack. It con
 ## Constructors
 
 ### HTTPRequest(string method, string url, string version, map<string, string> headers, string body)
- This is a constructor for the HTTPRequest class. Example usage:
+This is a constructor for the HTTPRequest class.
+
+Example usage:
  ```cpp
     map<string, string> headers;
     headers["Host"] = "localhost:8080";
@@ -53,7 +56,9 @@ This folder contains the code for the Application Layer of the TCP Stack. It con
 
  ### HTTPRequest()
 
- This is the default constructor for the HTTPRequest class. Example usage:
+ This is the default constructor for the HTTPRequest class. 
+ 
+ Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest();
  ```
@@ -64,7 +69,9 @@ This folder contains the code for the Application Layer of the TCP Stack. It con
 
  - filename: string
 
- It opens the file with the given filename and parses the HTTP Request from the file. Example file:
+ It opens the file with the given filename and parses the HTTP Request from the file. 
+ 
+ Example file:
  ```
     POST /login HTTP/1.1
     Host: localhost:8080
@@ -82,7 +89,9 @@ Example usage:
 
  ### void print()
 
- This method prints the HTTP Request to the console. Sample output:
+ This method prints the HTTP Request to the console. 
+ 
+ Sample output:
  ```
     HTTP Request
     Method: POST
@@ -99,7 +108,9 @@ Example usage:
 
  ### bool isRequest()
 
- This method returns true if the HTTP Message is a request and false if it is a response. Example usage:
+ This method returns true if the HTTP Message is a request and false if it is a response. 
+ 
+ Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");
     if (request->isRequest()) {
@@ -111,7 +122,9 @@ Example usage:
 
  ### string getMethod()
 
- This method returns the method of the HTTP Request. Example usage:
+ This method returns the method of the HTTP Request. 
+ 
+ Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");
     cout << "Method: " << request->getMethod() << endl;
@@ -119,7 +132,9 @@ Example usage:
 
  ### string getURL()
 
- This method returns the url of the HTTP Request. Example usage:
+ This method returns the url of the HTTP Request. 
+ 
+ Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");
     cout << "URL: " << request->getURL() << endl;
@@ -127,7 +142,9 @@ Example usage:
 
  ### string getVersion()
 
- This method returns the version of the HTTP Request. Example usage:
+ This method returns the version of the HTTP Request. 
+ 
+ Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");
     cout << "Version: " << request->getVersion() << endl;
@@ -135,7 +152,9 @@ Example usage:
 
  ### map<string, string> getHeaders()
 
- This method returns the headers of the HTTP Request. Example usage:
+ This method returns the headers of the HTTP Request. 
+ 
+ Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");
     map<string, string> headers = request->getHeaders();
@@ -146,7 +165,9 @@ Example usage:
 
  ### string getBody()
 
- This method returns the body of the HTTP Request. Example usage:
+ This method returns the body of the HTTP Request. 
+ 
+ Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");
     cout << "Body: " << request->getBody() << endl;
@@ -154,7 +175,9 @@ Example usage:
 
  ### void setMethod(string method)
 
- This method sets the method of the HTTP Request. Example usage:
+ This method sets the method of the HTTP Request. 
+ 
+ Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");
     request->setMethod("GET");
@@ -163,7 +186,9 @@ Example usage:
 
  ### void setURL(string url)
 
- This method sets the url of the HTTP Request. Example usage:
+ This method sets the url of the HTTP Request. 
+ 
+ Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");
     request->setURL("/logout");
@@ -172,7 +197,9 @@ Example usage:
 
  ### void setVersion(string version)
 
- This method sets the version of the HTTP Request. Example usage:
+ This method sets the version of the HTTP Request. 
+ 
+ Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");
     request->setVersion("HTTP/1.0");
@@ -181,7 +208,9 @@ Example usage:
 
  ### void setHeaders(map<string, string> headers)
 
- This method sets the headers of the HTTP Request. Example usage:
+ This method sets the headers of the HTTP Request. 
+ 
+ Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");
     map<string, string> headers;
@@ -199,146 +228,11 @@ Example usage:
 
  ### void setBody(string body)
 
- This method sets the body of the HTTP Request. Example usage:
+ This method sets the body of the HTTP Request. 
+ 
+ Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");
     request->setBody("username=hello&password=world");
     cout << "Body: " << request->getBody() << endl;
  ```
-
- ## HTTPResponse
-
- This class represents an HTTP Response. It has the following properties:
-
- - version: string
- - statusCode: int
- - statusMessage: string
- - headers: map<string, string>
- - body: string
-
- It has the following methods:
- - HTTPResponse(string version, int statusCode, string statusMessage, map<string, string> headers, string body)
- - HTTPResponse()
- - HTTPResponse(string filename)
- - void print()
- - bool isRequest()
- - string getVersion()
- - int getStatusCode()
- - string getStatusMessage()
- - map<string, string> getHeaders()
- - string getBody()
- - void setVersion(string version)
- - void setStatusCode(int statusCode)
- - void setStatusMessage(string statusMessage)
- - void setHeaders(map<string, string> headers)
- - void setBody(string body)
-
- ### HTTPResponse(string version, int statusCode, string statusMessage, map<string, string> headers, string body)
-
- This is the constructor for the HTTPResponse class. It takes in the following parameters:
-
- - version: string
- - statusCode: int
- - statusMessage: string
- - headers: map<string, string>
- - body: string
-
- ### HTTPResponse()
-
- This is the default constructor for the HTTPResponse class. It sets the following properties:
-
- - version: "HTTP/1.1"
- - statusCode: 200
- - statusMessage: "OK"
- - headers: map<string, string>()
- - body: ""
-
- ### HTTPResponse(string filename)
-
- This is the constructor for the HTTPResponse class. It takes in the following parameters:
-
- - filename: string
-
- It opens the file with the given filename and parses the HTTP Response from the file.
-
- ### void print()
-
- This method prints the HTTP Response to the console.
-
- ### bool isRequest()
-
- This method returns true if the HTTP Message is a request and false if it is a response.
-
- ### string getVersion()
-
- This method returns the version of the HTTP Response.
-
- ### int getStatusCode()
-
- This method returns the status code of the HTTP Response.
-
- ### string getStatusMessage()
-
- This method returns the status message of the HTTP Response.
-
- ### map<string, string> getHeaders()
-
- This method returns the headers of the HTTP Response.
-
- ### string getBody()
-
- This method returns the body of the HTTP Response.
-
- ### void setVersion(string version)
-
- This method sets the version of the HTTP Response.
-
- ### void setStatusCode(int statusCode)
-
- This method sets the status code of the HTTP Response.
-
- ### void setStatusMessage(string statusMessage)
-
- This method sets the status message of the HTTP Response.
-
- ### void setHeaders(map<string, string> headers)
-
- This method sets the headers of the HTTP Response.
-
- ### void setBody(string body)
-
- This method sets the body of the HTTP Response.
-
- ## ApplicationLayer
-
- This class represents the application layer in the network stack. It has the following methods:
-
- - send(HTTPMessage *message)
- - recieve(HTTPMessage *message)
-
- ### send(HTTPMessage *message)
-
- This method sends an HTTPMessage to the transport layer.
-
- ### recieve(HTTPMessage *message)
-
- This method recieves an HTTPMessage from the transport layer.s method sets the headers of the HTTP Response.
-
- ### void setBody(string body)
-
- This method sets the body of the HTTP Response.
-
- ## ApplicationLayer
-
- This class represents the application layer in the network stack. It has the following methods:
-
- - send(HTTPMessage *message)
- - recieve(HTTPMessage *message)
-
- ### send(HTTPMessage *message)
-
- This method sends an HTTPMessage to the transport layer.
-
- ### recieve(HTTPMessage *message)
-
- This method recieves an HTTPMessage from the transport layer.
