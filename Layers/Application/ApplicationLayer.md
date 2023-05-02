@@ -38,7 +38,7 @@ This folder contains the code for the Application Layer of the TCP Stack. It con
 
 ## Constructors
 
-### `HTTPRequest(string method, string url, string version, map<string, string> headers, string body)`
+### HTTPRequest(string method, string url, string version, map<string, string> headers, string body)
  This is a constructor for the HTTPRequest class. Example usage:
  ```cpp
     map<string, string> headers;
