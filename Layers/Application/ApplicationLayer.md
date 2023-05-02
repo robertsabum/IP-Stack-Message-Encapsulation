@@ -20,21 +20,21 @@ This folder contains the code for the Application Layer of the TCP Stack. It con
  - `body` : string
 
  It has the following methods:
- - [`HTTPRequest(string method, string url, string version, map<string, string> headers, string body)`](#HTTPRequeststring-method-string-url-string-version-mapstring-string-headers-string-body)
- - [`HTTPRequest()`](#HTTPRequest)
- - [`HTTPRequest(string filename)`](#HTTPRequeststring-filename)
- - [`print()`](#void-print)
- - [`isRequest()`](#bool-isRequest)
- - [`getMethod()`](#string-getMethod)
- - [`getURL()`](#string-getURL)
- - [`getVersion()`](#string-getVersion)
- - [`getHeaders()`](#mapstring-string-getHeaders)
- - [`getBody()`](#string-getBody)
- - [`setMethod(string method)`](#void-setMethodstring-method)
- - [`setURL(string url)`](#void-setURLstring-url)
- - [`setVersion(string version)`](#void-setVersionstring-version)
- - [`setHeaders(map<string, string> headers)`](#void-setHeadersmapstring-string-headers)
- - [`setBody(string body)`](#void-setBodystring-body)
+ - [HTTPRequest(string method, string url, string version, map<string, string> headers, string body)](#HTTPRequeststring-method-string-url-string-version-mapstring-string-headers-string-body)
+ - [HTTPRequest()](#HTTPRequest)
+ - [HTTPRequest(string filename)](#HTTPRequeststring-filename)
+ - [print()](#void-print)
+ - [isRequest()](#bool-isRequest)
+ - [getMethod()](#string-getMethod)
+ - [getURL()](#string-getURL)
+ - [getVersion()](#string-getVersion)
+ - [getHeaders()](#mapstring-string-getHeaders)
+ - [getBody()](#string-getBody)
+ - [setMethod(string method)](#void-setMethodstring-method)
+ - [setURL(string url)](#void-setURLstring-url)
+ - [setVersion(string version)](#void-setVersionstring-version)
+ - [setHeaders(map<string, string> headers)](#void-setHeadersmapstring-string-headers)
+ - [setBody(string body)](#void-setBodystring-body)
 
 ## Constructors
 
