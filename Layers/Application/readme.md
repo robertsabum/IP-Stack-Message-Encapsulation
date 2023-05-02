@@ -1,115 +1,3 @@
-code
-```cpp
-#ifndef HTTPRESPONSE_H
-#define HTTPRESPONSE_H
-
-#include <iostream>
-#include <map>
-#include <string>
-
-using namespace std;
-
-class HTTPResponse
-{
-private:
-    string version;
-    string statusCode;
-    string reasonPhrase;
-    map<string, string> headers;
-    string body;
-
-public:
-    HTTPResponse(string version, string statusCode, string reasonPhrase, map<string, string> headers, string body)
-    {
-        this->version = version;
-        this->statusCode = statusCode;
-        this->reasonPhrase = reasonPhrase;
-        this->headers = headers;
-        this->body = body;
-    }
-
-    HTTPResponse()
-    {
-        this->version = "HTTP/1.1";
-        this->statusCode = "200";
-        this->reasonPhrase = "OK";
-        this->headers = map<string, string>();
-        this->body = "<html><body><h1>It works!</h1></body></html>";
-    }
-
-    ~HTTPResponse()
-    {
-    }
-
-    string getVersion()
-    {
-        return this->version;
-    }
-
-    string getStatusCode()
-    {
-        return this->statusCode;
-    }
-
-    string getReasonPhrase()
-    {
-        return this->reasonPhrase;
-    }
-
-    map<string, string> getHeaders()
-    {
-        return this->headers;
-    }
-
-    string getBody()
-    {
-        return this->body;
-    }
-
-    void setVersion(string version)
-    {
-        this->version = version;
-    }
-
-    void setStatusCode(string statusCode)
-    {
-        this->statusCode = statusCode;
-    }
-
-    void setReasonPhrase(string reasonPhrase)
-    {
-        this->reasonPhrase = reasonPhrase;
-    }
-
-    void setHeaders(map<string, string> headers)
-    {
-        this->headers = headers;
-    }
-
-    void setBody(string body)
-    {
-        this->body = body;
-    }
-
-    void print()
-    {
-        cout << "HTTP Response" << endl;
-        cout << "Version: " << this->version << endl;
-        cout << "Status Code: " << this->statusCode << endl;
-        cout << "Reason Phrase: " << this->reasonPhrase << endl;
-        cout << "Headers: " << endl;
-        for (auto const &x : this->headers)
-        {
-            cout << x.first << ": " << x.second << endl;
-        }
-        cout << "Body: " << this->body << endl;
-        cout << endl;
-    }
-};
-
-#endif
-
-```
 # Application Layer
 This folder contains the code for the Application Layer of the TCP Stack. It contains the following classes:
 - [HTTPRequest](#HTTPRequest) 
@@ -145,9 +33,9 @@ It has the following methods:
 - [setHeaders(map<string, string> headers)](#void-setHeadersmapstring-string-headers)
 - [setBody(string body)](#void-setBodystring-body)
 
-## Constructors
+### Constructors
 
-### HTTPRequest(string method, string url, string version, map<string, string> headers, string body)
+#### HTTPRequest(string method, string url, string version, map<string, string> headers, string body)
 This is a constructor for the HTTPRequest class.
 
 Example usage:
@@ -161,8 +49,7 @@ Example usage:
     HTTPRequest* request = new HTTPRequest("POST", "/login", "HTTP/1.1",    headers, "");
 ```
 
-
-### HTTPRequest()
+#### HTTPRequest()
 
 This is the default constructor for the HTTPRequest class. 
  
@@ -171,7 +58,7 @@ Example usage:
     HTTPRequest* request = new HTTPRequest();
 ```
 
-### HTTPRequest(string filename)
+#### HTTPRequest(string filename)
 
 This is the constructor for the HTTPRequest class. It takes in the following parameters:
 
@@ -194,12 +81,12 @@ Example usage:
     HTTPRequest* request = new HTTPRequest("request.txt");
 ```
 
- ### void print()
+#### void print()
 
- This method prints the HTTP Request to the console. 
+This method prints the HTTP Request to the console. 
  
- Sample output:
- ```
+Sample output:
+```
     HTTP Request
     Method: POST
     URL: /login
@@ -211,9 +98,9 @@ Example usage:
     Content-Length: 0
     Content-Type: application/x-www-form-urlencoded
     Body: username=hello&password=world
- ```
+```
 
-### bool isRequest()
+#### bool isRequest()
 
 This method returns true if the HTTP Message is a request and false if it is a response. 
  
@@ -227,7 +114,7 @@ Example usage:
     }
  ```
 
-### string getMethod()
+#### string getMethod()
 
 This method returns the method of the HTTP Request. 
  
@@ -241,7 +128,7 @@ Output:
 ```
     Method: POST
 ```
-### string getURL()
+#### string getURL()
 
 This method returns the url of the HTTP Request. 
  
@@ -256,7 +143,7 @@ Output:
     URL: /login
 ```
 
-### string getVersion()
+#### string getVersion()
 
 This method returns the version of the HTTP Request. 
  
@@ -271,7 +158,7 @@ Output:
     Version: HTTP/1.1
 ```
 
-### map<string, string> getHeaders()
+#### map<string, string> getHeaders()
 
 This method returns the headers of the HTTP Request. 
  
@@ -293,7 +180,7 @@ Output:
     Content-Type: application/x-www-form-urlencoded
 ```
 
-### string getBody()
+#### string getBody()
 
 This method returns the body of the HTTP Request. 
  
@@ -308,7 +195,7 @@ Output:
     Body: username=hello&password=world
 ```
 
-### void setMethod(string method)
+#### void setMethod(string method)
 
 This method sets the method of the HTTP Request. 
  
@@ -326,7 +213,7 @@ Output:
     Method: GET
 ```
 
-### void setURL(string url)
+#### void setURL(string url)
 
 This method sets the url of the HTTP Request. 
  
@@ -344,7 +231,7 @@ Output:
     URL: /logout
 ```
 
-### void setVersion(string version)
+#### void setVersion(string version)
 
 This method sets the version of the HTTP Request. 
  
@@ -362,7 +249,7 @@ Output:
     Version: HTTP/1.0
 ```
 
-### void setHeaders(map<string, string> headers)
+#### void setHeaders(map<string, string> headers)
 
 This method sets the headers of the HTTP Request. 
  
@@ -408,7 +295,7 @@ Output:
     Body: username=hello&password=world
 ```
 
-### void setBody(string body)
+#### void setBody(string body)
 
 This method sets the body of the HTTP Request. 
  
@@ -426,8 +313,52 @@ Output:
     Body: username=world&password=hello
 ```
 
+## HTTPResponse
 
-### HTTPResponse()
+This class represents an HTTP Response. It has the following properties:
+
+- `version` : string
+- `status` : string
+- `reasonPhrase` : string
+- `headers` : map<string, string>
+- `body` : string
+
+
+It has the following methods:
+
+- [HTTPResponse(string version, string status, string reasonPhrase, map<string, string> headers, string body)](#HTTPResponsestring-version-string-status-string-reasonPhrase-mapstring-string-headers-string-body)
+- [HTTPResponse()](#HTTPResponse)
+- [HTTPResponse(string filename)](#HTTPResponsestring-filename)
+- [print()](#void-print)
+- [isRequest()](#bool-isRequest)
+- [getVersion()](#string-getVersion)
+- [getStatus()](#string-getStatus)
+- [getReasonPhrase()](#string-getReasonPhrase)
+- [getHeaders()](#mapstring-string-getHeaders)
+- [getBody()](#string-getBody)
+- [setVersion(string version)](#void-setVersionstring-version)
+- [setStatus(string status)](#void-setStatusstring-status)
+- [setReasonPhrase(string reasonPhrase)](#void-setReasonPhrasestring-reasonPhrase)
+- [setHeaders(map<string, string> headers)](#void-setHeadersmapstring-string-headers)
+- [setBody(string body)](#void-setBodystring-body)
+
+### Constructors
+
+#### HTTPResponse(string version, string status, string reasonPhrase, map<string, string> headers, string body)
+This is a constructor for the HTTPResponse class.
+
+Example usage:
+```cpp
+    map<string, string> headers;
+    headers["Host"] = "localhost:8080";
+    headers["User-Agent"] = "curl/7.64.1";
+    headers["Accept"] = "*/*";
+    headers["Content-Length"] = "0";
+    headers["Content-Type"] = "application/x-www-form-urlencoded";
+    HTTPResponse* response = new HTTPResponse("HTTP/1.1", "200", "OK", headers, "");
+```
+
+#### HTTPResponse()
 
 This is the default constructor for the HTTPResponse class. 
  
@@ -436,7 +367,7 @@ Example usage:
     HTTPResponse* response = new HTTPResponse();
 ```
 
-### void print()
+#### void print()
 
 This method prints the HTTP Response to the console. 
  
@@ -452,7 +383,7 @@ This method prints the HTTP Response to the console.
     Body: <html><body><h1>It works!</h1></body></html>
  ```
 
-### bool isResponse()
+#### bool isResponse()
 
 This method returns true if the HTTP Message is a response and false if it is a request. 
  
@@ -466,7 +397,7 @@ Example usage:
     }
  ```
 
-### string getVersion()
+#### string getVersion()
 
 This method returns the version of the HTTP Response. 
  
@@ -481,7 +412,7 @@ Output:
     Version: HTTP/1.1
 ```
 
-### string getStatusCode()
+#### string getStatusCode()
 
 This method returns the status code of the HTTP Response. 
  
@@ -496,7 +427,7 @@ Output:
     Status Code: 200
 ```
 
-### string getReasonPhrase()
+#### string getReasonPhrase()
 
 This method returns the reason phrase of the HTTP Response. 
  
@@ -511,7 +442,7 @@ Output:
     Reason Phrase: OK
 ```
 
-### map<string, string> getHeaders()
+#### map<string, string> getHeaders()
 
 This method returns the headers of the HTTP Response. 
  
@@ -531,7 +462,7 @@ Output:
     Content-Length: 48
 ```
 
-### string getBody()
+#### string getBody()
 
 This method returns the body of the HTTP Response. 
  
@@ -546,7 +477,7 @@ Output:
     Body: <html><body><h1>It works!</h1></body></html>
 ```
 
-### void setVersion(string version)
+#### void setVersion(string version)
 
 This method sets the version of the HTTP Response. 
  
@@ -564,7 +495,7 @@ Output:
     Version: HTTP/1.0
 ```
 
-### void setStatusCode(string statusCode)
+#### void setStatusCode(string statusCode)
 
 This method sets the status code of the HTTP Response. 
  
@@ -582,7 +513,7 @@ Output:
     Status Code: 404
 ```
 
-### void setReasonPhrase(string reasonPhrase)
+#### void setReasonPhrase(string reasonPhrase)
 
 This method sets the reason phrase of the HTTP Response. 
  
@@ -600,7 +531,7 @@ Output:
     Reason Phrase: Not Found
 ```
 
-### void setHeaders(map<string, string> headers)
+#### void setHeaders(map<string, string> headers)
 
 This method sets the headers of the HTTP Response. 
  
@@ -634,7 +565,7 @@ Output:
     Body: 
 ```
 
-### void setBody(string body)
+#### void setBody(string body)
 
 This method sets the body of the HTTP Response. 
  
@@ -650,4 +581,135 @@ Output:
 ```
     Body: 
     Body: <html><body><h1>It works!</h1></body></html>
+```
+
+#### HTTPMessage
+
+This class represents an HTTP Message. It has the following properties:
+
+- `_isRequest` : bool
+- `request` : HTTPRequest*
+- `response` : HTTPResponse*
+
+It has the following methods:
+- [HTTPMessage(HTTPRequest* _request)](#HTTPMessageHTTPRequest-_request)
+- [HTTPMessage(HTTPResponse* _response)](#HTTPMessageHTTPResponse-_response)
+- [print()](#void-print-1)
+- [isRequest()](#bool-isRequest-1)
+
+### Constructors
+
+#### HTTPMessage(HTTPRequest* _request)
+
+This is a constructor for the HTTPMessage class. It takes in the following parameters:
+
+- _request: HTTPRequest*
+
+Example usage:
+```cpp
+    map<string, string> headers;
+    headers["Host"] = "localhost:8080";
+    headers["User-Agent"] = "curl/7.64.1";
+    headers["Accept"] = "*/*";
+    headers["Content-Length"] = "0";
+    headers["Content-Type"] = "application/x-www-form-urlencoded";
+    HTTPRequest* request = new HTTPRequest("POST", "/login", "HTTP/1.1",    headers, "");
+    HTTPMessage* message = new HTTPMessage(request);
+```
+
+#### HTTPMessage(HTTPResponse* _response)
+
+This is a constructor for the HTTPMessage class. It takes in the following parameters:
+
+- _response: HTTPResponse*
+
+Example usage:
+```cpp
+    map<string, string> headers;
+    headers["Content-Type"] = "text/html";
+    headers["Content-Length"] = "0";
+    HTTPResponse* response = new HTTPResponse("HTTP/1.1", 200, "OK", headers, "");
+    HTTPMessage* message = new HTTPMessage(response);
+```
+
+#### void print()
+
+This method prints the HTTP Message to the console. 
+ 
+Sample output:
+```
+    HTTP Request
+    Method: POST
+    URL: /login
+    Version: HTTP/1.1
+    Headers:
+    Host: localhost:8080
+    User-Agent: curl/7.64.1
+    Accept: */*
+    Content-Length: 0
+    Content-Type: application/x-www-form-urlencoded
+    Body: username=hello&password=world
+```
+
+#### bool isRequest()
+
+This method returns true if the HTTP Message is a request and false if it is a response. 
+ 
+Example usage:
+```cpp
+    HTTPRequest* request = new HTTPRequest("request.txt");
+    HTTPMessage* message = new HTTPMessage(request);
+    if (message->isRequest()) {
+        cout << "This is a request" << endl;
+    } else {
+        cout << "This is a response" << endl;
+    }
+```
+
+Output:
+```
+    This is a request
+```
+
+
+## ApplicationLayer
+
+This class represents the Application Layer of the TCP Stack. It has the following methods:
+- [ApplicationLayer()](#ApplicationLayer)
+- [send(HTTPMessage *message)](#HTTPMessage-sendHTTPMessage-message)
+- [recieve(HTTPMessage *message)](#void-recieveHTTPMessage-message)
+
+### Constructors
+
+#### ApplicationLayer()
+
+This is the default constructor for the ApplicationLayer class. 
+ 
+Example usage:
+```cpp
+    ApplicationLayer* applicationLayer = new ApplicationLayer();
+```
+
+### Methods
+
+#### HTTPMessage *send(HTTPMessage *message)
+
+This method sends an HTTPMessage to the Transport Layer. 
+ 
+Example usage:
+```cpp
+    ApplicationLayer* applicationLayer = new ApplicationLayer();
+    HTTPRequest* request = new HTTPRequest("request.txt");
+    HTTPMessage* message = applicationLayer->send(request);
+```
+
+#### void recieve(HTTPMessage *message)
+
+This method recieves an HTTPMessage from the Transport Layer. 
+ 
+Example usage:
+```cpp
+    ApplicationLayer* applicationLayer = new ApplicationLayer();
+    HTTPRequest* request = new HTTPRequest("request.txt");
+    applicationLayer->recieve(request);
 ```
