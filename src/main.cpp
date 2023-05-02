@@ -17,6 +17,6 @@ int main()
   cout << "\n\n ****** Sending HTTP Request ******" << endl;
   BitStream *bits1 = stack1->send(new HTTPMessage(request));
   
-  cout << "\n\n ****** Recieving Bitstream ******" << endl;
-  stack2->receive(bits1);
+  // cout << "\n\n ****** Recieving Bitstream ******" << endl;
+  // stack2->receive(bits1);
 }

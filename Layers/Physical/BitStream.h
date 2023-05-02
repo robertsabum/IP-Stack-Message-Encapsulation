@@ -10,13 +10,11 @@ using namespace std;
 
 class BitStream{
     private:
-        vector<bool> bits;
         EthernetFrame* frame;
 
     public:
         BitStream(EthernetFrame* frame) {
             this->frame = frame;
-            this->bits = vector<bool>();
         }
 
         ~BitStream() {
@@ -25,20 +23,20 @@ class BitStream{
             }
         }
 
-        void setBits(vector<bool> bits) {
-            this->bits = bits;
-        }
-
-        vector<bool> getBits() {
-            return this->bits;
-        }
-
         void setEthernetFrame(EthernetFrame* frame) {
             this->frame = frame;
         }
 
         EthernetFrame* getEthernetFrame() {
             return this->frame;
+        }
+
+        void writeToFile(){
+            // write object to file in binary mode
+            ofstream outfile;
+            outfile.open("bitstream.bin", ios::out | ios::binary);
+            outfile.write((char *)this, sizeof(*this));
+            outfile.close();
         }
 };
 

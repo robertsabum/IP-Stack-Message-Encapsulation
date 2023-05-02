@@ -38,6 +38,7 @@ public:
       EthernetFrame *frame = Ethernetbuffer.front();
       Ethernetbuffer.pop();
       BitStream *bitstream = new BitStream(frame);
+      bitstream->writeToFile();
       cout << "Served an item from the buffer" << endl;
       cout << "Sent out a Bitstream" << endl;
       return bitstream;
