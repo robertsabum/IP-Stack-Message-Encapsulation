@@ -130,6 +130,10 @@ Example usage:
     cout << "Method: " << request->getMethod() << endl;
  ```
 
+ Output:
+ ```
+    Method: POST
+ ```
  ### string getURL()
 
  This method returns the url of the HTTP Request. 
@@ -138,6 +142,11 @@ Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");
     cout << "URL: " << request->getURL() << endl;
+ ```
+
+ Output:
+ ```
+    URL: /login
  ```
 
  ### string getVersion()
@@ -149,6 +158,11 @@ Example usage:
     HTTPRequest* request = new HTTPRequest("request.txt");
     cout << "Version: " << request->getVersion() << endl;
  ```
+
+Output:
+```
+    Version: HTTP/1.1
+```
 
  ### map<string, string> getHeaders()
 
@@ -163,6 +177,15 @@ Example usage:
     }
  ```
 
+ Output:
+ ```
+    Host: localhost:8080
+    User-Agent: curl/7.64.1
+    Accept: */*
+    Content-Length: 0
+    Content-Type: application/x-www-form-urlencoded
+ ```
+
  ### string getBody()
 
  This method returns the body of the HTTP Request. 
@@ -173,6 +196,11 @@ Example usage:
     cout << "Body: " << request->getBody() << endl;
  ```
 
+ Output:
+ ```
+    Body: username=hello&password=world
+ ```
+
  ### void setMethod(string method)
 
  This method sets the method of the HTTP Request. 
@@ -180,59 +208,96 @@ Example usage:
  Example usage:
  ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");
+    cout << "Method: " << request->getMethod() << endl;
     request->setMethod("GET");
     cout << "Method: " << request->getMethod() << endl;
  ```
 
+ Output:
+ ```
+    Method: POST
+    Method: GET
+ ```
+
  ### void setURL(string url)
 
- This method sets the url of the HTTP Request. 
+This method sets the url of the HTTP Request. 
  
- Example usage:
- ```cpp
-    HTTPRequest* request = new HTTPRequest("request.txt");
-    request->setURL("/logout");
-    cout << "URL: " << request->getURL() << endl;
- ```
+Example usage:
+```cpp
+   HTTPRequest* request = new HTTPRequest("request.txt");
+   cout << "URL: " << request->getURL() << endl;
+   request->setURL("/logout");
+   cout << "URL: " << request->getURL() << endl;
+```
+
+Output:
+```
+    URL: /login
+    URL: /logout
+```
 
  ### void setVersion(string version)
 
  This method sets the version of the HTTP Request. 
  
- Example usage:
- ```cpp
-    HTTPRequest* request = new HTTPRequest("request.txt");
-    request->setVersion("HTTP/1.0");
-    cout << "Version: " << request->getVersion() << endl;
- ```
+Example usage:
+```cpp
+   HTTPRequest* request = new HTTPRequest("request.txt");
+   cout << "Version: " << request->getVersion() << endl;
+   request->setVersion("HTTP/1.0");
+   cout << "Version: " << request->getVersion() << endl;
+```
 
- ### void setHeaders(map<string, string> headers)
+Output:
+```
+    Version: HTTP/1.1
+    Version: HTTP/1.0
+```
 
- This method sets the headers of the HTTP Request. 
+### void setHeaders(map<string, string> headers)
+
+This method sets the headers of the HTTP Request. 
  
- Example usage:
- ```cpp
-    HTTPRequest* request = new HTTPRequest("request.txt");
-    map<string, string> headers;
-    headers["Host"] = "localhost:8080";
-    headers["User-Agent"] = "curl/7.64.1";
-    headers["Accept"] = "*/*";
-    headers["Content-Length"] = "0";
-    headers["Content-Type"] = "application/x-www-form-urlencoded";
-    request->setHeaders(headers);
-    map<string, string> headers = request->getHeaders();
-    for (auto const &x : headers) {
-        cout << x.first << ": " << x.second << endl;
-    }
- ```
+Example usage:
+```cpp
+   HTTPRequest* request = new HTTPRequest("request.txt");
+   map<string, string> headers;
+   headers["Host"] = "localhost:8080";
+   headers["User-Agent"] = "curl/7.64.1";
+   headers["Accept"] = "*/*";
+   headers["Content-Length"] = "0";
+   headers["Content-Type"] = "application/x-www-form-urlencoded";
+   request->setHeaders(headers);
+   map<string, string> headers = request->getHeaders();
+   for (auto const &x : headers) {
+       cout << x.first << ": " << x.second << endl;
+   }
+```
 
- ### void setBody(string body)
+Output:
+```
+    Host: localhost:8080
+    User-Agent: curl/7.64.1
+    Accept: */*
+    Content-Length: 0
+    Content-Type: application/x-www-form-urlencoded
+```
 
- This method sets the body of the HTTP Request. 
+### void setBody(string body)
+
+This method sets the body of the HTTP Request. 
  
- Example usage:
- ```cpp
-    HTTPRequest* request = new HTTPRequest("request.txt");
-    request->setBody("username=hello&password=world");
+Example usage:
+```cpp
+   HTTPRequest* request = new HTTPRequest("request.txt");
     cout << "Body: " << request->getBody() << endl;
- ```
+   request->setBody("username=world&password=hello");
+   cout << "Body: " << request->getBody() << endl;
+```
+
+Output:
+```
+    Body: username=hello&password=world
+    Body: username=world&password=hello
+```
