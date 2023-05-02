@@ -536,7 +536,15 @@ This method sets the version of the HTTP Response.
 Example usage:
 ```cpp
     HTTPResponse* response = new HTTPResponse();
+    cout << "Version: " << response->getVersion() << endl;
     response->setVersion("HTTP/1.0");
+    cout << "Version: " << response->getVersion() << endl;
+```
+
+Output:
+```
+    Version: HTTP/1.1
+    Version: HTTP/1.0
 ```
 
 ### void setStatusCode(string statusCode)
@@ -546,7 +554,15 @@ This method sets the status code of the HTTP Response.
 Example usage:
 ```cpp
     HTTPResponse* response = new HTTPResponse();
+    cout << "Status Code: " << response->getStatusCode() << endl;
     response->setStatusCode("404");
+    cout << "Status Code: " << response->getStatusCode() << endl;
+```
+
+Output:
+```
+    Status Code: 200
+    Status Code: 404
 ```
 
 ### void setReasonPhrase(string reasonPhrase)
@@ -556,7 +572,15 @@ This method sets the reason phrase of the HTTP Response.
 Example usage:
 ```cpp
     HTTPResponse* response = new HTTPResponse();
+    cout << "Reason Phrase: " << response->getReasonPhrase() << endl;
     response->setReasonPhrase("Not Found");
+    cout << "Reason Phrase: " << response->getReasonPhrase() << endl;
+```
+
+Output:
+```
+    Reason Phrase: OK
+    Reason Phrase: Not Found
 ```
 
 ### void setHeaders(map<string, string> headers)
@@ -567,9 +591,30 @@ Example usage:
 ```cpp
     HTTPResponse* response = new HTTPResponse();
     map<string, string> headers;
+    response->print();
     headers["Content-Type"] = "text/html";
     headers["Content-Length"] = "48";
     response->setHeaders(headers);
+    response->print();
+```
+
+Output:
+```
+    HTTP Response
+    Version: HTTP/1.1
+    Status Code: 200
+    Reason Phrase: OK
+    Headers:
+    Body: 
+
+    HTTP Response
+    Version: HTTP/1.1
+    Status Code: 200
+    Reason Phrase: OK
+    Headers:
+    Content-Type: text/html
+    Content-Length: 48
+    Body: 
 ```
 
 ### void setBody(string body)
@@ -579,5 +624,13 @@ This method sets the body of the HTTP Response.
 Example usage:
 ```cpp
     HTTPResponse* response = new HTTPResponse();
+    cout << "Body: " << response->getBody() << endl;
     response->setBody("<html><body><h1>It works!</h1></body></html>");
+    cout << "Body: " << response->getBody() << endl;
+```
+
+Output:
+```
+    Body: 
+    Body: <html><body><h1>It works!</h1></body></html>
 ```
