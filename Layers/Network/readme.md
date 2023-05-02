@@ -50,7 +50,7 @@ Example usage:
     IPv4Packet* packet = new IPv4Packet(segment);
 ```
 
-### Methods
+### Getters
 
 #### uint8_t getVersion()
 
@@ -201,6 +201,8 @@ Example usage:
     IPv4Packet* packet = new IPv4Packet(segment);
     TCPSegment* segment = packet->getTCPSegment();
 ```
+
+### Setters
 
 #### void setVersion(uint8_t version)
 
