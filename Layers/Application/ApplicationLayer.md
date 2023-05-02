@@ -369,6 +369,7 @@ This method sets the headers of the HTTP Request.
 Example usage:
 ```cpp
    HTTPRequest* request = new HTTPRequest("request.txt");
+   request->print();
    map<string, string> headers;
    headers["Host"] = "localhost:8080";
    headers["User-Agent"] = "curl/7.64.1";
@@ -377,18 +378,34 @@ Example usage:
    headers["Content-Type"] = "application/x-www-form-urlencoded";
    request->setHeaders(headers);
    map<string, string> headers = request->getHeaders();
-   for (auto const &x : headers) {
-       cout << x.first << ": " << x.second << endl;
-   }
+   request->print();
 ```
 
 Output:
 ```
+    HTTP Request
+    Method: POST
+    URL: /login
+    Version: HTTP/1.1
+    Headers:
     Host: localhost:8080
     User-Agent: curl/7.64.1
     Accept: */*
     Content-Length: 0
     Content-Type: application/x-www-form-urlencoded
+    Body: username=hello&password=world
+    
+    HTTP Request
+    Method: POST
+    URL: /login
+    Version: HTTP/1.1
+    Headers:
+    Host: localhost:8080
+    User-Agent: curl/7.64.1
+    Accept: */*
+    Content-Length: 0
+    Content-Type: application/x-www-form-urlencoded
+    Body: username=hello&password=world
 ```
 
 ### void setBody(string body)
