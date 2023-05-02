@@ -364,5 +364,8 @@ This method serves an item from the buffer and returns a TCPSegment.
 Example usage:
 ```cpp
     TransportLayer* transportLayer = new TransportLayer();
+    HTTPRequest* request = new HTTPRequest("request.txt");
+    HTTPMessage* message = new HTTPMessage(request);
+    transportLayer->recieve(message);
     TCPSegment* segment = transportLayer->serve();
 ```
