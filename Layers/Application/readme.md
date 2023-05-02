@@ -100,6 +100,8 @@ Sample output:
     Body: username=hello&password=world
 ```
 
+### Getters
+
 #### bool isRequest()
 
 This method returns true if the HTTP Message is a request and false if it is a response. 
@@ -194,6 +196,8 @@ Output:
 ```
     Body: username=hello&password=world
 ```
+
+### Setters
 
 #### void setMethod(string method)
 
@@ -383,6 +387,8 @@ This method prints the HTTP Response to the console.
     Body: <html><body><h1>It works!</h1></body></html>
  ```
 
+### Getters
+
 #### bool isResponse()
 
 This method returns true if the HTTP Message is a response and false if it is a request. 
@@ -476,6 +482,8 @@ Output:
 ```
     Body: <html><body><h1>It works!</h1></body></html>
 ```
+
+### Setters
 
 #### void setVersion(string version)
 
@@ -650,6 +658,8 @@ Sample output:
     Content-Type: application/x-www-form-urlencoded
     Body: username=hello&password=world
 ```
+
+### Getters
 
 #### bool isRequest()
 

@@ -71,6 +71,12 @@ Example usage:
 
 This is the destructor for the TCPSegment class.
 
+Example usage:
+```cpp
+    TCPSegment* segment = new TCPSegment(message);
+    delete segment;
+```
+
 ### Getters
 
 #### uint16_t getSourcePort()
