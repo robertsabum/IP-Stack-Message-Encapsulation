@@ -72,7 +72,7 @@ Example file:
     POST /login HTTP/1.1
     Host: localhost:8080
     User-Agent: curl/7.64.1
-    Accept: */*
+    Accept:* /*
     Content-Length: 0
     Content-Type: application/x-www-form-urlencoded
     username=hello&password=world
@@ -96,7 +96,7 @@ Sample output:
     Headers:
     Host: localhost:8080
     User-Agent: curl/7.64.1
-    Accept: */*
+    Accept:* /*
     Content-Length: 0
     Content-Type: application/x-www-form-urlencoded
     Body: username=hello&password=world
@@ -179,7 +179,7 @@ Output:
 ```
     Host: localhost:8080
     User-Agent: curl/7.64.1
-    Accept: */*
+    Accept:* /*
     Content-Length: 0
     Content-Type: application/x-www-form-urlencoded
 ```
@@ -283,7 +283,7 @@ Output:
     Headers:
     Host: localhost:8080
     User-Agent: curl/7.64.1
-    Accept: */*
+    Accept:* /*
     Content-Length: 0
     Content-Type: application/x-www-form-urlencoded
     Body: username=hello&password=world
@@ -295,7 +295,7 @@ Output:
     Headers:
     Host: localhost:8080
     User-Agent: curl/7.64.1
-    Accept: */*
+    Accept:* /*
     Content-Length: 0
     Content-Type: application/x-www-form-urlencoded
     Body: username=hello&password=world
@@ -655,7 +655,7 @@ Sample output:
     Headers:
     Host: localhost:8080
     User-Agent: curl/7.64.1
-    Accept: */*
+    Accept:* /*
     Content-Length: 0
     Content-Type: application/x-www-form-urlencoded
     Body: username=hello&password=world
@@ -688,8 +688,8 @@ Output:
 
 This class represents the Application Layer of the TCP Stack. It has the following methods:
 - [ApplicationLayer()](#ApplicationLayer)
-- [send(HTTPMessage *message)](#HTTPMessage-sendHTTPMessage-message)
-- [recieve(HTTPMessage *message)](#void-recieveHTTPMessage-message)
+- [send(HTTPMessage* message)](#HTTPMessage-sendHTTPMessage-message)
+- [recieve(HTTPMessage* message)](#void-recieveHTTPMessage-message)
 
 ### Constructors
 
@@ -704,7 +704,7 @@ Example usage:
 
 ### Methods
 
-#### HTTPMessage *send(HTTPMessage *message)
+#### HTTPMessage* send(HTTPMessage* message)
 
 This method sends an HTTPMessage to the Transport Layer. 
  
@@ -715,9 +715,11 @@ Example usage:
     HTTPMessage* message = applicationLayer->send(request);
 ```
 
-#### void recieve(HTTPMessage *message)
+#### void recieve(HTTPMessage* message)
 
-This method recieves an HTTPMessage from the Transport Layer. 
+This method recieves an HTTPMessage from the Transport Layer.
+If its a response, it prints the response to the console.
+If its a request, it sends back a response. 
  
 Example usage:
 ```cpp

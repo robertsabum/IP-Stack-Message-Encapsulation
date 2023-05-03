@@ -317,7 +317,7 @@ Example usage:
 
 This class represents the Transport Layer of the TCP Stack. It has the following properties:
 
-- `HTTPBuffer` : vector<HTTPMessage*>
+- `HTTPBuffer` : queue<HTTPMessage*>
 
 and the following methods:
 
@@ -330,7 +330,7 @@ and the following methods:
 
 #### TransportLayer()
 
-This is the default constructor for the TransportLayer class. 
+This is the default constructor for the TransportLayer class. It takes no arguments and initializes the HTTPBuffer to an empty queue.
  
 Example usage:
 ```cpp
@@ -341,7 +341,7 @@ Example usage:
 
 #### HTTPMessage *recieve(TCPSegment *segment)
 
-This method recieves a TCPSegment from the Network Layer and returns an HTTPMessage. 
+This method recieves a TCPSegment from the Network Layer and returns the encapsulated HTTPMessage. 
  
 Example usage:
 ```cpp
@@ -352,7 +352,7 @@ Example usage:
 
 #### TCPSegment *recieve(HTTPMessage *message)
 
-This method recieves an HTTPMessage from the Application Layer and returns a TCPSegment. 
+This method recieves an HTTPMessage from the Application Layer and enqueue it in the HTTPBuffer. It then calls `serve()` 
  
 Example usage:
 ```cpp
@@ -363,7 +363,7 @@ Example usage:
 
 #### TCPSegment *serve()
 
-This method serves an item from the buffer and returns a TCPSegment. 
+This method serves an item from the buffer by adding the TCP Header and returning the TCPSegment. 
  
 Example usage:
 ```cpp
