@@ -69,7 +69,7 @@ Example usage:
 
 This class represents the Physical Layer of the TCP Stack. It has the following properties:
 
-- `EthernetBuffer` : vector<EthernetFrame*>
+- `EthernetBuffer` : queue<EthernetFrame*>
 
 and the following methods:
 
@@ -82,7 +82,7 @@ and the following methods:
 
 #### PhysicalLayer()
 
-This is the default constructor for the PhysicalLayer class. 
+This is the default constructor for the PhysicalLayer class. It takes no parameters and initializes the EthernetBuffer to an empty queue.
  
 Example usage:
 ```cpp
@@ -104,7 +104,7 @@ Example usage:
 
 #### BitStream *receive(EthernetFrame *frame)
 
-This method receives an EthernetFrame from the Data Link Layer and returns a BitStream. 
+This method receives an EthernetFrame from the Data Link Layer, enqueue it in the EthernetBuffer and calls `serve()`. 
  
 Example usage:
 ```cpp
@@ -115,7 +115,7 @@ Example usage:
 
 #### BitStream *serve()
 
-This method serves an item from the buffer and returns a BitStream. 
+This method serves an item from the buffer and returns a BitStream as well as writes it to a binary file. 
  
 Example usage:
 ```cpp

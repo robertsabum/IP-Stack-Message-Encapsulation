@@ -361,7 +361,7 @@ Example usage:
 
 This class represents the Network Layer of the TCP Stack. It has the following properties:
 
-- `TCPBuffer` : vector<TCPSegment*>
+- `TCPBuffer` : queue<TCPSegment*>
 
 and the following methods:
 - [NetworkLayer()](#NetworkLayer)
@@ -373,7 +373,8 @@ and the following methods:
 
 #### NetworkLayer()
 
-This is the constructor for the NetworkLayer class. It takes no parameters. 
+This is the constructor for the NetworkLayer class. It takes no parameters and 
+initializes the TCPBuffer to an empty queue. 
  
 Example usage:
 ```cpp
@@ -384,7 +385,7 @@ Example usage:
 
 #### TCPSegment *recieve(IPv4Packet *packet)
 
-This method recieves an IPv4Packet from the Data Link Layer and returns a TCPSegment. 
+This method recieves an IPv4Packet from the DataLink Layer, unpacks it into a TCPSegment which it then returns. 
  
 Example usage:
 ```cpp
@@ -394,7 +395,7 @@ Example usage:
 
 #### IPv4Packet *recieve(TCPSegment *segment)
 
-This method recieves a TCPSegment from the Transport Layer and returns an IPv4Packet. 
+This method recieves an TCPSegmet from the TransportLayer and queues it in the TCPBuffer then calls `serve()`. 
  
 Example usage:
 ```cpp
