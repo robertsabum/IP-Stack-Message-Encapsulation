@@ -315,7 +315,12 @@ Example usage:
 
 ## TransportLayer
 
-This class represents the Transport Layer of the TCP Stack. It has the following methods:
+This class represents the Transport Layer of the TCP Stack. It has the following properties:
+
+- `HTTPBuffer` : vector<HTTPMessage*>
+
+and the following methods:
+
 - [TransportLayer()](#TransportLayer)
 - [recieve(TCPSegment *segment)](#HTTPMessage-recieveTCPSegment-segment)
 - [recieve(HTTPMessage *message)](#TCPSegment-recieveHTTPMessage-message)

@@ -10,13 +10,14 @@ This folder contains the code for the Application Layer of the TCP Stack. It con
 This class represents an HTTP Request. It has the following properties:
 
 - `method` : string
-- `url` : string
+- `url` : string 
 - `version` : string
 - `headers` : map<string, string>
 - `body` : string
 
 
 It has the following methods:
+
 - [HTTPRequest(string method, string url, string version, map<string, string> headers, string body)](#HTTPRequeststring-method-string-url-string-version-mapstring-string-headers-string-body)
 - [HTTPRequest()](#HTTPRequest)
 - [HTTPRequest(string filename)](#HTTPRequeststring-filename)
@@ -76,6 +77,7 @@ Example file:
     Content-Type: application/x-www-form-urlencoded
     username=hello&password=world
  ```
+
 Example usage:
 ```cpp
     HTTPRequest* request = new HTTPRequest("request.txt");

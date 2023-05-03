@@ -359,7 +359,11 @@ Example usage:
 
 ## NetworkLayer
 
-This class represents the Network Layer of the TCP Stack. It has the following methods:
+This class represents the Network Layer of the TCP Stack. It has the following properties:
+
+- `TCPBuffer` : vector<TCPSegment*>
+
+and the following methods:
 - [NetworkLayer()](#NetworkLayer)
 - [recieve(IPv4Packet *packet)](#TCPSegment-recieveIPv4Packet-packet)
 - [recieve(TCPSegment *segment)](#IPv4Packet-recieveTCPSegment-segment)
